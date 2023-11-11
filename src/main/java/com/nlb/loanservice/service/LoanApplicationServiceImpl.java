@@ -17,20 +17,20 @@ import com.nlb.loanservice.repository.LoanApplicationRepository;
 
 @Service
 public class LoanApplicationServiceImpl implements ILoanApplicationService {
-	
+
 	@Autowired
 	LoanApplicationRepository loanAppRepo;
 
 	@Override
-	public LoanApplication saveLoanApplication(LoanApplication loanApp){
-		if(loanAppRepo.existsById(loanApp.getId())) {
+	public LoanApplication saveLoanApplication(LoanApplication loanApp) {
+		if (loanAppRepo.existsById(loanApp.getId())) {
 			throw new LoanAlreadyExists("Already Exists");
-		}else if(loanApp.getRequestedAmount() < 10000.0 || loanApp.getRequestedAmount() > 2000000.0) {
+		} else if (loanApp.getRequestedAmount() < 10000.0 || loanApp.getRequestedAmount() > 2000000.0) {
 			throw new LoanGrantLimit("LoanAmount must between 1000 to 2000000.");
-		}else if(loanApp.getBankName() == ""){
+		} else if (loanApp.getBankName() == "") {
 			throw new LoanBlankField("Bank Name should not be empty");
-		}else {
-		
+		} else {
+
 			LoanApplication loanApp1 = new LoanApplication();
 			loanApp1.setId(loanApp.getId());
 			loanApp1.setBankName(loanApp.getBankName());
@@ -40,7 +40,7 @@ public class LoanApplicationServiceImpl implements ILoanApplicationService {
 			loanApp1.setMaxLoanAmount(2000000);
 			loanApp1.setMinCreditScore(10.0);
 			loanApp1.setMinInterestRate(0.07);
-			loanApp1.setProcessingFee(loanApp.getRequestedAmount()*0.005);
+			loanApp1.setProcessingFee(loanApp.getRequestedAmount() * 0.005);
 			loanApp1.setStatus(Status.PENDING);
 			loanApp1.setRating(Rating.SATISFIED);
 			return loanAppRepo.save(loanApp1);
@@ -60,6 +60,12 @@ public class LoanApplicationServiceImpl implements ILoanApplicationService {
 		LoanApplication loanApp = loanAppRepo.findById(loanId).get();
 		loanApp.setStatus(Status.REJECTED);
 		loanAppRepo.save(loanApp);
+		return loanApp;
+	}
+
+	@Override
+	public LoanApplication displayLoanById(int loanId) {
+		LoanApplication loanApp = loanAppRepo.findById(loanId).get();
 		return loanApp;
 	}
 
