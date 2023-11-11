@@ -1,4 +1,4 @@
-package com.nlb.loanservice.entity;
+package com.nlb.loanservice.constants;
 
 public enum Rating {
 	POOR, SATISFIED, GOOD, VERYGOOD, EXCELLENT	
