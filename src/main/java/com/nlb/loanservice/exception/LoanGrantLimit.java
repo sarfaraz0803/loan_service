@@ -1,13 +1,10 @@
 package com.nlb.loanservice.exception;
 
 public class LoanGrantLimit extends RuntimeException{
-<<<<<<< HEAD
 
 	private static final long serialVersionUID = 1L;
-=======
-	
->>>>>>> refs/heads/develop
-	String msg;
+
+	private String msg;
 
 	public LoanGrantLimit(String msg) {
 		super();
