@@ -2,7 +2,7 @@ package com.nlb.loanservice.exception;
 
 public class LoanBlankField extends RuntimeException {
 
-	
+	private static final long serialVersionUID = 1L;
 	String msg;
 
 	public String getMsg() {
