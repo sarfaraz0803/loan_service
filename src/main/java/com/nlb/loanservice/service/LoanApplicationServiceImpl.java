@@ -2,6 +2,8 @@ package com.nlb.loanservice.service;
 
 import java.util.NoSuchElementException;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,7 @@ public class LoanApplicationServiceImpl implements ILoanApplicationService {
 			loanApp1.setMaxLoanAmount(2000000);
 			loanApp1.setMinCreditScore(10.0);
 			loanApp1.setMinInterestRate(0.07);
-			loanApp1.setProcessingFee(loanApp.getRequestedAmount()*0.005);
+			loanApp1.setProcessingFee(loanApp.getRequestedAmount() * 0.005);
 			loanApp1.setStatus(Status.PENDING);
 			loanApp1.setRating(Rating.SATISFIED);
 			return loanAppRepo.save(loanApp1);
@@ -58,6 +60,12 @@ public class LoanApplicationServiceImpl implements ILoanApplicationService {
 		LoanApplication loanApp = loanAppRepo.findById(loanId).get();
 		loanApp.setStatus(Status.REJECTED);
 		loanAppRepo.save(loanApp);
+		return loanApp;
+	}
+
+	@Override
+	public LoanApplication displayLoanById(int loanId) {
+		LoanApplication loanApp = loanAppRepo.findById(loanId).get();
 		return loanApp;
 	}
 
