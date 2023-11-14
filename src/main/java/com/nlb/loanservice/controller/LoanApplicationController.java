@@ -61,5 +61,14 @@ public class LoanApplicationController {
 			throw new LoanNotFound("No loan issued to this id.");
 		}
 	}
+	
+	@RequestMapping(value="/getLoan/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Object> getLoan(@PathVariable int id){
+		try {
+			return new ResponseEntity<Object>(serviceImpl.displayLoanById(id), HttpStatus.OK);
+		} catch (Exception e) {
+			throw new LoanNotFound("No loan issued to this id.");
+		}
+	}
 
 }
