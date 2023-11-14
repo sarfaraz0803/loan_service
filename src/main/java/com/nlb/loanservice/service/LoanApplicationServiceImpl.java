@@ -2,8 +2,6 @@ package com.nlb.loanservice.service;
 
 import java.util.NoSuchElementException;
 
-import javax.validation.ValidationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
