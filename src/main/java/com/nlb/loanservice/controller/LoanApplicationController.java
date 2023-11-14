@@ -50,7 +50,6 @@ public class LoanApplicationController {
 		} catch (Exception e) {
 			throw new LoanNotFound("No loan issued to this id.");
 		}
-
 	}
 
 	@GetMapping(value = "/rejectloan/{id}")
@@ -61,13 +60,15 @@ public class LoanApplicationController {
 			throw new LoanNotFound("No loan issued to this id.");
 		}
 	}
-	
-	@RequestMapping(value="/getLoan/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Object> getLoan(@PathVariable int id){
+
+	@GetMapping(value = "/getLoan/{id}")
+	public ResponseEntity<Object> displayLoan(@PathVariable int id) {
 		try {
 			return new ResponseEntity<Object>(serviceImpl.displayLoanById(id), HttpStatus.OK);
-		} catch (Exception e) {
+		} catch (LoanNotFound e) {
 			throw new LoanNotFound("No loan issued to this id.");
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.OK);
 		}
 	}
 

@@ -15,20 +15,20 @@ import com.nlb.loanservice.repository.LoanApplicationRepository;
 
 @Service
 public class LoanApplicationServiceImpl implements ILoanApplicationService {
-	
+
 	@Autowired
 	LoanApplicationRepository loanAppRepo;
 
 	@Override
-	public LoanApplication saveLoanApplication(LoanApplication loanApp){
-		if(loanAppRepo.existsById(loanApp.getId())) {
+	public LoanApplication saveLoanApplication(LoanApplication loanApp) {
+		if (loanAppRepo.existsById(loanApp.getId())) {
 			throw new LoanAlreadyExists("Already Exists");
-		}else if(loanApp.getRequestedAmount() < 10000.0 || loanApp.getRequestedAmount() > 2000000.0) {
+		} else if (loanApp.getRequestedAmount() < 10000.0 || loanApp.getRequestedAmount() > 2000000.0) {
 			throw new LoanGrantLimit("LoanAmount must between 1000 to 2000000.");
-		}else if(loanApp.getBankName() == ""){
+		} else if (loanApp.getBankName() == "") {
 			throw new LoanBlankField("Bank Name should not be empty");
-		}else {
-		
+		} else {
+
 			LoanApplication loanApp1 = new LoanApplication();
 			loanApp1.setId(loanApp.getId());
 			loanApp1.setBankName(loanApp.getBankName());
