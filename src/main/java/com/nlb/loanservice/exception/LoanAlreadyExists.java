@@ -2,8 +2,6 @@ package com.nlb.loanservice.exception;
 
 public class LoanAlreadyExists extends RuntimeException{
 	
-	private static final long serialVersionUID = 1L;
-	
 	private String msg;
 
 	public LoanAlreadyExists(String msg) {

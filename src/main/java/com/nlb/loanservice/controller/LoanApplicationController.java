@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nlb.loanservice.entity.LoanApplication;
@@ -15,15 +15,19 @@ import com.nlb.loanservice.exception.LoanAlreadyExists;
 import com.nlb.loanservice.exception.LoanBlankField;
 import com.nlb.loanservice.exception.LoanGrantLimit;
 import com.nlb.loanservice.exception.LoanNotFound;
+import com.nlb.loanservice.repository.LoanApplicationRepository;
 import com.nlb.loanservice.service.LoanApplicationServiceImpl;
 
 @RestController
+@RequestMapping(value = "/api/v1")
 public class LoanApplicationController {
 
 	@Autowired
 	LoanApplicationServiceImpl serviceImpl;
+	@Autowired
+	LoanApplicationRepository loanRepo;
 
-	@RequestMapping(value = "/applyloan", method= {RequestMethod.POST})
+	@PostMapping(value = "/applyloan")
 	public ResponseEntity<Object> applyLoan(@RequestBody LoanApplication loanApp) {
 		try {
 
@@ -50,6 +54,7 @@ public class LoanApplicationController {
 		} catch (Exception e) {
 			throw new LoanNotFound("No loan issued to this id.");
 		}
+
 	}
 
 	@GetMapping(value = "/rejectloan/{id}")
