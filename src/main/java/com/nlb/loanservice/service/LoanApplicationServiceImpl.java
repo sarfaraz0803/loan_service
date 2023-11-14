@@ -2,14 +2,12 @@ package com.nlb.loanservice.service;
 
 import java.util.NoSuchElementException;
 
-import javax.validation.ValidationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nlb.loanservice.entity.LoanApplication;
-import com.nlb.loanservice.entity.Rating;
-import com.nlb.loanservice.entity.Status;
+import com.nlb.loanservice.constants.Rating;
+import com.nlb.loanservice.constants.Status;
 import com.nlb.loanservice.exception.LoanAlreadyExists;
 import com.nlb.loanservice.exception.LoanBlankField;
 import com.nlb.loanservice.exception.LoanGrantLimit;
